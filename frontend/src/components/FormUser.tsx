@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { api } from "@/lib/api"; // Certifique-se de que você tem o Axios configurado no arquivo 'api'
+import { api } from "@/lib/api";
 
 interface UserInterface {
   name: string;
@@ -10,14 +10,12 @@ interface UserInterface {
 }
 
 export default function FormUser() {
-  // Estado para os campos do formulário
   const [userData, setUserData] = useState<UserInterface>({
     name: "",
     email: "",
-    status: true, // ou qualquer valor inicial
+    status: true, 
   });
 
-  // Função para lidar com a alteração dos campos
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -26,15 +24,13 @@ export default function FormUser() {
     }));
   };
 
-  // Função para enviar os dados do formulário
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Impede o comportamento padrão de envio do formulário
+    e.preventDefault(); 
     try {
-      // Envia os dados do usuário para a API usando o método POST
       const response = await api.post("/users", userData);
       console.log("Usuário criado:", response.data);
       alert("Usuário criado com sucesso!");
-      setUserData({ name: "", email: "", status: true }); // Reseta os campos após o envio
+      setUserData({ name: "", email: "", status: true });
     } catch (error) {
       console.error("Erro ao criar usuário:", error);
       alert("Erro ao criar o usuário.");
